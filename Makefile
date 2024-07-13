@@ -1,4 +1,4 @@
-.PHONY: up down composer-install phpstan k6
+.PHONY: up down composer-install phpstan k6 test
 
 up:
 	docker compose up

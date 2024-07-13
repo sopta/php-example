@@ -18,6 +18,7 @@
 .idea/**/phpspec.xml
 .idea/**/phpunit.xml
 .idea/**/vcs.xml
+.idea/**/php-test-framework.xml
 
 # Generated files
 .idea/**/contentModel.xml
