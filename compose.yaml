@@ -39,6 +39,15 @@ services:
     networks:
       - mynetwork
 
+  cli:
+    image: composer:latest
+    container_name: cli
+    volumes:
+      - .:/app
+    working_dir: /app
+    networks:
+      - mynetwork
+
   k6:
     image: grafana/k6:latest
     container_name: k6
