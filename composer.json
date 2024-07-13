@@ -1,10 +1,12 @@
 {
   "require": {
-    "slim/slim": "^4.0",
-    "slim/psr7": "^1.7",
-    "league/fractal": "^0.20.1",
+    "illuminate/database": "^11.15",
     "league/container": "^4.2",
-    "maximebf/debugbar": "^1.22"
+    "league/fractal": "^0.20.1",
+    "maximebf/debugbar": "^1.22",
+    "slim/psr7": "^1.7",
+    "slim/slim": "^4.0",
+    "vlucas/phpdotenv": "^5.6"
   },
   "require-dev": {
     "pestphp/pest": "^2.34",

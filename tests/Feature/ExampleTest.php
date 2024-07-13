@@ -27,5 +27,6 @@ test('GET order detail is ok', function () {
     expect($response->getStatusCode())->toBe(200)
         ->and($responseData)->toBeArray()
         ->and($responseData)->toHaveKeys(['data'])
-        ->and($responseData['data'][0])->toHaveKeys(['id', 'name', 'sum', 'createdAt', 'items']);
+        ->and($responseData['data'][0])->toHaveKeys(['id', 'name', 'sum', 'createdAt', 'items'])
+        ->and(count($responseData))->toBe(1, (string) $response->getBody());
 });

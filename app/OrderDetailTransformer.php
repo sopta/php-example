@@ -1,24 +1,27 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Example;
 
 use League\Fractal\TransformerAbstract;
+use stdClass;
 
 final class OrderDetailTransformer extends TransformerAbstract
 {
     /**
-     * @param array<string, int|string> $user
+     * @param stdClass $user
      * @return array<string, int|string>
      */
-    public function transform(array $user): array
+    public function transform(stdClass $user): array
     {
         return [
-            'id' => (int) $user['id'],
-            'name' => $user['name'],
-            'sum' => $user['sum'],
-            'createdAt' => $user['sum'],
-            'items' => $user['items'],
+            'id' => (int) $user->id,
+            'price' => $user->price,
+            'currency' => $user->currency,
+            'state' => $user->state,
+            'createdAt' => $user->created_at,
+            //'items' => $user->items,
         ];
     }
 }
