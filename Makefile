@@ -1,7 +1,7 @@
 .PHONY: up down composer-install phpstan k6 test migrate seed
 
 up:
-	docker compose up
+	docker compose up -d
 
 down:
 	docker compose down
