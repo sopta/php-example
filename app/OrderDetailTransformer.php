@@ -28,6 +28,7 @@ final class OrderDetailTransformer extends TransformerAbstract
             foreach ($user->items as $item) {
                 $res['items'][] = [
                     'id' => $item->id,
+                    'name' => $item->name,
                     'price' => $item->price,
                     'currency' => $item->currency,
                 ];
