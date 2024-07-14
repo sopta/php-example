@@ -21,7 +21,7 @@ Run these commands in order
 
 `make migrate`
 
-`make seed`
+`make seed` -> create 1 order with N items
 
 ## Tools
 `make test` -> Run pest tests
