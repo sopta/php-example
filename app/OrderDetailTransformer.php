@@ -15,13 +15,25 @@ final class OrderDetailTransformer extends TransformerAbstract
      */
     public function transform(stdClass $user): array
     {
-        return [
-            'id' => (int) $user->id,
-            'price' => $user->price,
+        $res = [
+            'id' => $user->id,
+            'total' => $user->total,
             'currency' => $user->currency,
             'state' => $user->state,
             'createdAt' => $user->created_at,
-            //'items' => $user->items,
+            'items' => [],
         ];
+
+        if (property_exists($user, 'items')) {
+            foreach ($user->items as $item) {
+                $res['items'][] = [
+                    'id' => $item->id,
+                    'price' => $item->price,
+                    'currency' => $item->currency,
+                ];
+            }
+        }
+
+        return $res;
     }
 }

@@ -1,4 +1,4 @@
-.PHONY: up down composer-install phpstan k6 test
+.PHONY: up down composer-install phpstan k6 test migrate seed
 
 up:
 	docker compose up
@@ -17,3 +17,9 @@ k6:
 
 test:
 	docker compose run --rm cli vendor/bin/pest
+
+migrate:
+	docker compose run --rm cli bin/astronaut migrate
+
+seed:
+	docker compose run --rm cli bin/astronaut seed

@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
 # Set Environment Variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,11 +14,15 @@ RUN set -eux; \
             libssl-dev \
             libmcrypt-dev \
             libonig-dev \
-            libxml2-dev; \
+            libxml2-dev \
+            unzip \
+            git; \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
     docker-php-ext-install pdo_mysql
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Verify installed extensions
 RUN php -m

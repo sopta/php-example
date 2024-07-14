@@ -22,11 +22,12 @@ test('GET home route is ok', function () {
 test('GET order detail is ok', function () {
     $response = $this->get('/333');
 
+    // todo @refactoring DB test
+
     $responseData = json_decode((string) $response->getBody(), true);
 
     expect($response->getStatusCode())->toBe(200)
         ->and($responseData)->toBeArray()
-        ->and($responseData)->toHaveKeys(['data'])
-        ->and($responseData['data'][0])->toHaveKeys(['id', 'name', 'sum', 'createdAt', 'items'])
+        ->and($responseData['data'])->toHaveKeys(['id', 'total', 'currency', 'state', 'createdAt', 'items'])
         ->and(count($responseData))->toBe(1, (string) $response->getBody());
 });

@@ -1,5 +1,6 @@
 {
   "require": {
+    "fakerphp/faker": "^1.23",
     "illuminate/database": "^11.15",
     "league/container": "^4.2",
     "league/fractal": "^0.20.1",

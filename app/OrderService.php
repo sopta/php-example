@@ -11,7 +11,17 @@ final class OrderService implements OrderServiceInterface
 {
     public function GetOrderDetail(string $id): stdClass
     {
-        return Capsule::table('order')->where('id', '=', $id)->first();
+        $order = Capsule::table('order')
+            ->where('order.id', '=', $id)
+            ->first();
+
+        $items = Capsule::table('order_item')
+            ->where('order_id', '=', $id)
+            ->get();
+
+        $order->items = $items->toArray();
+
+        return $order;
     }
 
     public function GetAllOrders(): array

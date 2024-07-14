@@ -11,7 +11,6 @@ use League\Container\Container;
 use League\Fractal\Manager;
 use League\Fractal\Serializer\DataArraySerializer;
 use Slim\Factory\AppFactory;
-use Illuminate\Database\Capsule\Manager as Capsule;
 
 // set timezone for timestamps etc
 date_default_timezone_set('UTC');
@@ -38,21 +37,7 @@ if (getenv('APP_ENV') === 'testing') {
     $container->add(OrderServiceInterface::class, OrderService::class);
 }
 
-$capsule = new Capsule();
-
-$capsule->addConnection([
-    'driver' => 'mysql',
-    'host' => getenv('DB_HOST'),
-    'database' => getenv('MYSQL_DATABASE'),
-    'username' => getenv('MYSQL_USER'),
-    'password' => getenv('MYSQL_PASSWORD'),
-    'charset' => 'utf8mb4',
-    'collation' => 'utf8mb4_general_ci',
-    'prefix' => '',
-]);
-
-$capsule->setAsGlobal();
-$capsule->bootEloquent();
+$database = require_once __DIR__ . '/../bootstrap/database.php';
 
 $app->get('/{id}', GetOrderDetailController::class);
 $app->get('/', HomeController::class);

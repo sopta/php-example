@@ -1,0 +1,83 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+const MIGRATIONS_PATH = __DIR__ . '/../database/migrations';
+const SEEDS_PATH = __DIR__ . '/../database/seeders';
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+require_once __DIR__ . '/../bootstrap/database.php';
+
+final class Astronaut
+{
+    private mixed $args;
+
+    public function __construct($args)
+    {
+        $this->args = $args;
+    }
+
+    private function help(): void
+    {
+        echo "\n";
+        echo "syntaxis: astronaut <command> [<args>]".PHP_EOL;
+        echo PHP_EOL;
+
+        echo "Commands: \n";
+        echo "astronaut --help                  -->   Displays the help menu.".PHP_EOL;
+        echo "astronaut migrate                 -->   Migrate the database.".PHP_EOL;
+        echo "astronaut seed                    -->   Seed the database tables.".PHP_EOL;
+        echo PHP_EOL;
+    }
+
+    public function exec(): void
+    {
+        if (count($this->args) <= 1) {
+            $this->help();
+        } else {
+            switch ($this->args[1]) {
+                case "migrate":
+                    $this->runMigrations();
+                    break;
+                case "seed":
+                    $this->runSeed();
+                    break;
+                case "help":
+                case "--help":
+                    $this->help();
+                    break;
+            }
+        }
+    }
+
+    private function runMigrations(): void
+    {
+        $files = glob(MIGRATIONS_PATH.'/*.php');
+
+        $this->run($files);
+    }
+
+    private function runSeed(): void
+    {
+        $files = glob(SEEDS_PATH.'/*.php');
+
+        $this->run($files);
+    }
+
+    private function run($files): void
+    {
+        foreach ($files as $migrationFile) {
+            $class = require_once($migrationFile);
+
+            $obj = new $class;
+            $obj->run();
+        }
+    }
+}
+
+(new Astronaut($argv))->exec();
