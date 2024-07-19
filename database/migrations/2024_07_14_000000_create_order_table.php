@@ -10,7 +10,8 @@ return new class extends Migration
 {
     public function run(): void
     {
-        //Capsule::schema()->dropIfExists('order');
+        Capsule::schema()->dropIfExists('order_item');
+        Capsule::schema()->dropIfExists('order');
 
         Capsule::schema()->create('order', function (Blueprint $table) {
             $table->bigIncrements('id');

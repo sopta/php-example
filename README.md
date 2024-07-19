@@ -9,8 +9,9 @@
 
 The PHP Example project is a small REST API.
 
-- GET /        -> Dummy data
-- GET /1111    -> Get an order by its ID 
+- GET /               -> Dummy data
+- GET /1111           -> Get an order by its ID 
+- GET /products/1111  -> Get a product by its ID
 
 ## Running the app
 Run these commands in order
@@ -32,6 +33,8 @@ See results:
 
 URL: http://localhost:80
 Adminer: http://localhost:3333
+
+## Examples
 
 ```bash
 $ curl -X GET localhost:80/1
@@ -74,6 +77,19 @@ $ curl -X GET localhost:80/1
                 "currency": "CZK"
             }
         ]
+    }
+]
+```
+
+```bash
+$ curl -X GET localhost:80/products/1
+[
+    {
+        "id": 1,
+        "name": "Russell Gutkowski",
+        "price": 86.0,
+        "currency": "CZK",
+        "createdAt": "2024-07-14 17:41:18"
     }
 ]
 ```

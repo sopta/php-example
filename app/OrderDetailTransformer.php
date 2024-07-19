@@ -10,22 +10,22 @@ use stdClass;
 final class OrderDetailTransformer extends TransformerAbstract
 {
     /**
-     * @param stdClass $user
+     * @param stdClass $order
      * @return array<string, int|string>
      */
-    public function transform(stdClass $user): array
+    public function transform(stdClass $order): array
     {
         $res = [
-            'id' => $user->id,
-            'total' => $user->total,
-            'currency' => $user->currency,
-            'state' => $user->state,
-            'createdAt' => $user->created_at,
+            'id' => $order->id,
+            'total' => $order->total,
+            'currency' => $order->currency,
+            'state' => $order->state,
+            'createdAt' => $order->created_at,
             'items' => [],
         ];
 
-        if (property_exists($user, 'items')) {
-            foreach ($user->items as $item) {
+        if (property_exists($order, 'items')) {
+            foreach ($order->items as $item) {
                 $res['items'][] = [
                     'id' => $item->id,
                     'name' => $item->name,
