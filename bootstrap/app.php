@@ -38,7 +38,7 @@ $container->defaultToShared(); // @todo the container will create a new instance
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$container->add(Manager::class, function () {
+$container->add(Manager::class, function() {
     $fractal = new Manager();
     $fractal->setSerializer(new DataArraySerializer());
     return $fractal;
@@ -54,30 +54,30 @@ $container->add(MySQLDriverInterface::class, DataRepositoryMySQL::class);
 $container->add(ElasticSearchDriverInterface::class, DataRepositoryElasticSearch::class);
 $container->add(AnalyticsServiceInterface::class,AnalyticsService::class);
 
-$container->add(GetProductQuery::class, function () use ($container) {
-    return new GetProductQuery(
+$container->add(GetProductQuery::class, fn() =>
+    new GetProductQuery(
         $container->get(MySQLDriverInterface::class),
         $container->get(ElasticSearchDriverInterface::class),
-    );
-})->setShared(false); // todo @refactoring do I need to call setShared if this has a callback?
+    )
+)->setShared(false); // todo @refactoring do I need to call setShared if this has a callback?
 
-$container->add(SaveProductToCacheCommandInterface::class, function () use ($container) {
-    return new SaveProductToCacheCommand(
+$container->add(SaveProductToCacheCommandInterface::class, fn() =>
+    new SaveProductToCacheCommand(
         $container->get(MySQLDriverInterface::class),
-        $container->get(ElasticSearchDriverInterface::class),
-    );
-});
+        $container->get(ElasticSearchDriverInterface::class)
+    )
+);
 
-$container->add(ProductDetailService::class, function () use ($container) {
-    return new ProductDetailService(
+$container->add(ProductDetailService::class, fn() =>
+     new ProductDetailService(
         $container->get(MySQLDriverInterface::class),
         $container->get(ElasticSearchDriverInterface::class),
         StoreDriversEnum::MySQL, // todo this could be switched from env
         $container->get(AnalyticsServiceInterface::class),
         $container->get(GetProductQuery::class),
         $container->get(SaveProductToCacheCommandInterface::class),
-    );
-});
+    )
+);
 
 $database = require_once __DIR__ . '/../bootstrap/database.php';
 
