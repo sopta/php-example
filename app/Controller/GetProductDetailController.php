@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Example;
+namespace Example\Controller;
 
+use Example\ProductDetailService;
+use Example\ProductDetailTransformer;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
 use Psr\Container\ContainerInterface;

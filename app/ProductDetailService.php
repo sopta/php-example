@@ -25,14 +25,15 @@ final readonly class ProductDetailService
             return $product;
         }
 
+        // $product = $this->mySQLDriver->FindProduct($id);
+        // $product = $this->elasticSearchDriver->FindById($id);
+
         // todo depends on the finally switching implementation
-        if ($this->mainStoreDriver == StoreDriversEnum::MySQL) {
-            //$product = $this->mySQLDriver->FindProduct($id);
-            $product = $this->getProductQuery->UseMysql()->Find((int)$id); // todo newer API
-        } else {
-            //$product = $this->elasticSearchDriver->FindById($id);
-            $product = $this->getProductQuery->UseElasticSearch()->Find((int)$id); // todo newer API
-        }
+        // todo $this->db->Execute($this->getProductQuery->UseMysql()->Find((int)$id))
+
+        $product = $this->mainStoreDriver == StoreDriversEnum::MySQL
+            ? $this->getProductQuery->UseMysql()->Find((int)$id)
+            : $this->getProductQuery->UseElasticSearch()->Find((int)$id);
 
         $this->saveProductToCacheCommand->Execute($product);
 

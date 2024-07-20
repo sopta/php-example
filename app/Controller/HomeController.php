@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Example;
+namespace Example\Controller;
 
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;

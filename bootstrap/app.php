@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 use Example\AnalyticsService;
 use Example\AnalyticsServiceInterface;
+use Example\Controller\GetOrderDetailController;
+use Example\Controller\GetProductDetailController;
+use Example\Controller\HomeController;
 use Example\DataRepositoryElasticSearch;
 use Example\DataRepositoryMySQL;
 use Example\DummyOrderService;
 use Example\ElasticSearchDriverInterface;
-use Example\GetOrderDetailController;
-use Example\GetProductDetailController;
 use Example\GetProductQuery;
-use Example\HomeController;
 use Example\SaveProductToCacheCommand;
 use Example\SaveProductToCacheCommandInterface;
 use Example\StoreDriversEnum;
